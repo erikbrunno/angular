@@ -14,7 +14,7 @@ import { switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 export class TopoComponent implements OnInit {
 
   public ofertas: Observable<Array<Oferta>>
-  public ofertasEncontradas: Array<Oferta>
+  //public ofertasEncontradas: Array<Oferta>
   private subjectPesquisa: Subject<string> = new Subject<string>()
 
   constructor(private ofertaService: OfertasService) { }
@@ -25,14 +25,20 @@ export class TopoComponent implements OnInit {
         debounceTime(1000),
         distinctUntilChanged(),
         switchMap((termo: string) => {
+
+          if (termo.trim() === '') {
+            console.log('Chegou2')
+            return of<Array<Oferta>>([])
+          }
+
           console.log('Requisicao http')
           return this.ofertaService.pesquisaOfertas(termo)
         })
       )
 
-    this.ofertas.subscribe((ofertas: Array<Oferta>) => {
+    /*this.ofertas.subscribe((ofertas: Array<Oferta>) => {
       this.ofertasEncontradas = ofertas
-    })
+    })*/
   }
 
   pesquisa(termoDaBusca: string): void {
@@ -45,6 +51,11 @@ export class TopoComponent implements OnInit {
       (erro: any) => console.log('Erro aconteceu: ', erro),
       () => console.log('Fluxo de eventos completo')
     )*/
+  }
+
+  limpaPesquisa(): void {
+    console.log('Chegou')
+    this.subjectPesquisa.next('')
   }
 
 }
