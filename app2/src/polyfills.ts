@@ -61,3 +61,6 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+
+ //import 'intl'
+ //import 'intl/locale-data/jsonp/pt-BR'
