@@ -234,6 +234,13 @@
       "complemento": "casa",
       "formaPagamento": "dinheiro",
       "id": 7
+    },
+    {
+      "endereco": "endereco de casa",
+      "numero": "10",
+      "complemento": "casa",
+      "formaPagamento": "dinheiro",
+      "id": 8
     }
   ]
 }
