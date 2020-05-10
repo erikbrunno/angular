@@ -41,7 +41,8 @@ export class OrdemCompraComponent implements OnInit {
       this.formulario.get('formaPagamento').markAsTouched()
     } else {
 
-      if (this.carrinhoService.exibirItens().length === 0) {
+      let itens: Array<ItemCarinho> = this.carrinhoService.exibirItens()
+      if (itens.length === 0) {
         alert('Você não selecionou nenhum item')
       } else {
 
@@ -49,12 +50,14 @@ export class OrdemCompraComponent implements OnInit {
             this.formulario.value.endereco,
             this.formulario.value.numero,
             this.formulario.value.complemento,
-            this.formulario.value.formaPagamento
+            this.formulario.value.formaPagamento,
+            itens
         )
 
         this.ordemCompraService.efetivarCompra(pedido)
           .subscribe((idPedidoCompra: number) => {
             this.idPedidoCompra = idPedidoCompra
+            this.carrinhoService.limparCarrinho()
         })
       }
     }
