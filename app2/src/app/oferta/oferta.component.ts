@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router'
 import { OfertasService } from '../ofertas.service';
 import { Oferta } from '../shared/oferta.model';
 import { Observable, Observer, Subscription, interval } from 'rxjs';
+import { CarrinhoService } from '../carrinho.service';
 
 @Component({
   selector: 'app-oferta',
@@ -12,18 +13,21 @@ import { Observable, Observer, Subscription, interval } from 'rxjs';
 })
 export class OfertaComponent implements OnInit, OnDestroy {
 
-  private tempoObservableSubscription: Subscription
-  private meuObservableSubscription: Subscription
+  //private tempoObservableSubscription: Subscription
+  //private meuObservableSubscription: Subscription
 
   public oferta: Oferta;
 
   constructor(
     private route: ActivatedRoute, 
-    private ofertasService: OfertasService
+    private ofertasService: OfertasService,
+    private carrinhoService: CarrinhoService
   ) {}
 
   ngOnInit(): void {
   
+    console.log('Oferta: ', this.carrinhoService.exibirItens())
+
     this.route.params.subscribe((parametro: Params) => {
       this.ofertasService.getOfertaPorId(parametro.id)
         .then((oferta: Oferta) => this.oferta = oferta)
@@ -65,6 +69,11 @@ export class OfertaComponent implements OnInit, OnDestroy {
     //Precisamos fazer o unsubscribe para eliminar as memory leak
     //this.tempoObservableSubscription.unsubscribe()
     //this.meuObservableSubscription.unsubscribe()
+  }
+
+  adicionarItemCarrinho(): void {
+    this.carrinhoService.incluirItem(this.oferta)
+    console.log('Itens: ', this.carrinhoService.exibirItens())
   }
 
 }
