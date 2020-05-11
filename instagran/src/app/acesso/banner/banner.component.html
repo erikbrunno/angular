@@ -1,3 +1,6 @@
+<button (click)="toggleEstado()">Teste</button>
 <div class="banner-background">
-    <img [@banner]="estado" src="../assets/banner-acesso/img_1.png" />
+    <img *ngFor="let imagem of imagens" 
+        [@banner]="imagem.estado" 
+        [src]="imagem.url" />
 </div>
