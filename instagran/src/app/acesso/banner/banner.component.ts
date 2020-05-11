@@ -15,7 +15,6 @@ import { Imagem } from './imagem.model'
         opacity: 1
       })),
       transition('escondido <=> visivel', animate('2s ease-in')),
-
     ])
   ]
 })
@@ -54,9 +53,5 @@ export class BannerComponent implements OnInit {
     this.imagens[this.idx].estado = 'visivel'
 
     setTimeout(() => this.logicaRotacao(), 3000)
-  }
-
-  toggleEstado(): void {
-    this.estado = this.estado === 'visivel' ? 'escondido' : 'visivel'
   }
 }
