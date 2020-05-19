@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { PublicacoesComponent } from './home/publicacoes/publicacoes.component'
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes'
+import { AuthGuard } from './auth-guard.service'
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import { ROUTES } from './app.routes'
     RouterModule.forRoot(ROUTES)
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
